@@ -1,0 +1,11 @@
+<ProjectTemplate xmlns="http://schemas.datacontract.org/2004/07/BluEditor.GameProject" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <ProjectFile>project.CBProj</ProjectFile>
+        <ProjectFolders xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <a:string>.CB</a:string>
+            <a:string>Assets</a:string>
+            <a:string>Assets/_Game/_Scripts</a:string>
+            <a:string>Assets/_Game/GFX</a:string>
+            <a:string>Assets/_Game/SFX</a:string>
+        </ProjectFolders>
+    <ProjectType>Empty Project</ProjectType>
+</ProjectTemplate>

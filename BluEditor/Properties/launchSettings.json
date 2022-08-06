@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BluEditor": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

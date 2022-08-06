@@ -1,0 +1,12 @@
+<Game z:Id="i1" xmlns="http://schemas.datacontract.org/2004/07/BluEditor.GameProject" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/">
+    <ProjectName>{0}</ProjectName>
+    <ProjectPath>{1}</ProjectPath>
+    <Scenes>
+        <Scene z:Id="i2">
+            <GameObjects xmlns:a="http://schemas.datacontract.org/2004/07/BluEditor.Components"/>
+            <IsActive>true</IsActive>
+            <Project z:Ref="i1"/>
+            <SceneName>Default Scene</SceneName>
+        </Scene>
+    </Scenes>
+</Game>

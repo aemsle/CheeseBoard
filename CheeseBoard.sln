@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluEditor", "BluEditor\BluEditor.csproj", "{700CDFB4-30B4-40A4-8042-121EF1461736}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0D86764B-4690-47B9-8BC5-118BBEFF3A81} = {0D86764B-4690-47B9-8BC5-118BBEFF3A81}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{F64E7149-E8B9-4060-B52E-DBF7716C92F0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineTest", "EngineTest\EngineTest.vcxproj", "{D23809D2-7CE9-45FA-9505-2FADF2885516}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F64E7149-E8B9-4060-B52E-DBF7716C92F0} = {F64E7149-E8B9-4060-B52E-DBF7716C92F0}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineDLL", "EngineDLL\EngineDLL.vcxproj", "{0D86764B-4690-47B9-8BC5-118BBEFF3A81}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F64E7149-E8B9-4060-B52E-DBF7716C92F0} = {F64E7149-E8B9-4060-B52E-DBF7716C92F0}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{700CDFB4-30B4-40A4-8042-121EF1461736}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{700CDFB4-30B4-40A4-8042-121EF1461736}.Debug|x64.Build.0 = Debug|Any CPU
+		{700CDFB4-30B4-40A4-8042-121EF1461736}.Release|x64.ActiveCfg = Release|Any CPU
+		{700CDFB4-30B4-40A4-8042-121EF1461736}.Release|x64.Build.0 = Release|Any CPU
+		{F64E7149-E8B9-4060-B52E-DBF7716C92F0}.Debug|x64.ActiveCfg = Debug|x64
+		{F64E7149-E8B9-4060-B52E-DBF7716C92F0}.Debug|x64.Build.0 = Debug|x64
+		{F64E7149-E8B9-4060-B52E-DBF7716C92F0}.Release|x64.ActiveCfg = Release|x64
+		{F64E7149-E8B9-4060-B52E-DBF7716C92F0}.Release|x64.Build.0 = Release|x64
+		{D23809D2-7CE9-45FA-9505-2FADF2885516}.Debug|x64.ActiveCfg = Debug|x64
+		{D23809D2-7CE9-45FA-9505-2FADF2885516}.Debug|x64.Build.0 = Debug|x64
+		{D23809D2-7CE9-45FA-9505-2FADF2885516}.Release|x64.ActiveCfg = Release|x64
+		{D23809D2-7CE9-45FA-9505-2FADF2885516}.Release|x64.Build.0 = Release|x64
+		{0D86764B-4690-47B9-8BC5-118BBEFF3A81}.Debug|x64.ActiveCfg = Debug|x64
+		{0D86764B-4690-47B9-8BC5-118BBEFF3A81}.Debug|x64.Build.0 = Debug|x64
+		{0D86764B-4690-47B9-8BC5-118BBEFF3A81}.Release|x64.ActiveCfg = Release|x64
+		{0D86764B-4690-47B9-8BC5-118BBEFF3A81}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55E8E490-25FD-4058-A283-F7A46E68B9D8}
+	EndGlobalSection
+EndGlobal
