@@ -6,31 +6,41 @@
              xmlns:local="clr-namespace:BluEditor.GameProject"
              mc:Ignorable="d" Width="800"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+    </UserControl.Resources>
+
     <UserControl.DataContext>
         <local:OpenProjectVM />
     </UserControl.DataContext>
 
     <Border CornerRadius="3" Background="{StaticResource Editor.Window.GrayBrush3}" Width="700"
-            HorizontalAlignment="Center" Margin="0,30">
+            HorizontalAlignment="Center" Margin="0,10">
         <StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
                 <ListBox Width="195" Height="250" ItemsSource="{Binding Projects}" x:Name="projectsListBox"
                      SelectedIndex="0">
                     <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
+                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemStyle}">
                             <EventSetter Event="MouseDoubleClick" Handler="OnListBoxItem_Mouse_DoubleClick" />
                         </Style>
                     </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{Binding Icon}" Width="32" Height="32" Margin="0,0,5,0" />
-                                <TextBlock Text="{Binding ProjectName}" />
+                            <StackPanel Width="180">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Icon}" Width="32" Height="32" Margin="0,0,5,0" />
+                                    <TextBlock Text="{Binding ProjectName}"
+                                               VerticalAlignment="Center"
+                                               FontSize="16"
+                                               FontStyle="Oblique" />
+                                </StackPanel>
+                                <TextBlock Text="{Binding ProjectPath}" FontSize="10" TextTrimming="WordEllipsis" />
+                                <TextBlock Text="{Binding Date}" FontSize="8" TextTrimming="WordEllipsis" Foreground="{StaticResource Editor.Disabled.FontBrush}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Border Width="400" Height="250" Margin="5,0,0,0">
+                <Border Width="400" Height="250" Margin="5,0,0,0" BorderThickness="1" CornerRadius="1.5" BorderBrush="{StaticResource Editor.Window.GrayBrush4}">
                     <Border.Background>
                         <ImageBrush ImageSource="{Binding Path=SelectedItem.Thumbnail, ElementName=projectsListBox}" />
                     </Border.Background>
@@ -38,7 +48,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
-                        Margin="0,70,0,0">
+                        Margin="0,73,0,0">
                 <Button Content="Open" Width="96" IsDefault="True" Click="OnOpen_Button_Click" />
                 <Button Content="Exit" Width="96" Margin="30,0,0,0" IsCancel="True" />
             </StackPanel>

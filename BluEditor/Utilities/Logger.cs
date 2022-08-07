@@ -13,10 +13,10 @@ namespace BluEditor.Utilities
 {
     public enum MessageType
     {
-        NONE = 0b0000,
         INFO = 0b0001,
         WARNING = 0b0010,
-        ERROR = 0b0100
+        ERROR = 0b0100,
+        NONE = 0b1000
     }
 
     public class LogMessage
