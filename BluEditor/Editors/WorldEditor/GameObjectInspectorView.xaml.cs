@@ -67,6 +67,7 @@ namespace BluEditor.Editors
 
         private void OnName_TextBox_GotKeyboardFocus(object in_sender, KeyboardFocusChangedEventArgs in_args)
         {
+            m_propertyName = string.Empty;
             m_undoAction = GetRenameAction();
         }
 

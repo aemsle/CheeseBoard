@@ -15,6 +15,8 @@ namespace BluEditor.Components
     [DataContract]
     public abstract class Component : ViewModelBase
     {
+        public abstract IMSComponent GetMultiSelectComponent(MSObject in_msObject);
+
         [DataMember]
         public GameObject Owner { get; private set; }
 
@@ -27,5 +29,26 @@ namespace BluEditor.Components
 
     public abstract class MSComponent<T> : ViewModelBase, IMSComponent where T : Component
     {
+        private bool m_enableUpdates = true;
+
+        public List<T> SelectedComponents { get; }
+
+        protected abstract bool UpdateComponents(string in_propertyName);
+
+        protected abstract bool UpdateMSComponents();
+
+        public void Refresh()
+        {
+            m_enableUpdates = false;
+            UpdateMSComponents();
+            m_enableUpdates = true;
+        }
+
+        public MSComponent(MSObject in_msObject)
+        {
+            Debug.Assert(in_msObject?.SelectedObjects?.Any() == true);
+            SelectedComponents = in_msObject.SelectedObjects.Select(obj => obj.GetComponent<T>()).ToList();
+            PropertyChanged += (s, e) => { if (m_enableUpdates) UpdateComponents(e.PropertyName); };
+        }
     }
 }

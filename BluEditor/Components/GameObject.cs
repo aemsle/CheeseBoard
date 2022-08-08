@@ -47,9 +47,10 @@ namespace BluEditor.Components
                         ObjectID = EngineAPI.CreateGameObject(this);
                         Debug.Assert(ID.IsValid(m_objectID));
                     }
-                    else
+                    else if (ID.IsValid(ObjectID))
                     {
                         EngineAPI.RemoveGameObject(this);
+                        ObjectID = ID.INVALID_ID;
                     }
 
                     OnPropertyChanged(nameof(Active));
@@ -162,40 +163,44 @@ namespace BluEditor.Components
 
         public List<GameObject> SelectedObjects { get; }
 
-        public static float? GetMixedValue(List<GameObject> in_gameObjects, Func<GameObject, float> in_getProperty)
+        private void MakeComponentList()
         {
-            float? value = in_getProperty(in_gameObjects.First());
+            m_components.Clear();
+            GameObject firstObject = SelectedObjects.FirstOrDefault();
+            if (firstObject == null) return;
 
-            foreach (GameObject? gameObject in in_gameObjects.Skip(1))
+            foreach (Component component in firstObject.Components)
             {
-                if (!value.Approx(in_getProperty(gameObject))) return null;
+                Type type = component.GetType();
+                if (!SelectedObjects.Skip(1).Any(obj => obj.GetComponent(type) == null))
+                {
+                    Debug.Assert(Components.FirstOrDefault(x => x.GetType() == type) == null);
+                    m_components.Add(component.GetMultiSelectComponent(this));
+                }
             }
-
-            return value;
         }
 
-        public static bool? GetMixedValue(List<GameObject> in_gameObjects, Func<GameObject, bool> in_getProperty)
+        public T GetMSComponent<T>() where T : IMSComponent
         {
-            bool? value = in_getProperty(in_gameObjects.First());
-
-            foreach (GameObject? gameObject in in_gameObjects.Skip(1))
-            {
-                if (value != (in_getProperty(gameObject))) return null;
-            }
-
-            return value;
+            return (T)m_components.FirstOrDefault(x => x.GetType() == typeof(T));
         }
 
-        public static string GetMixedValue(List<GameObject> in_gameObjects, Func<GameObject, string> in_getProperty)
+        public static float? GetMixedValue<T>(List<T> in_objects, Func<T, float> in_getProperty)
         {
-            string? value = in_getProperty(in_gameObjects.First());
+            var value = in_getProperty(in_objects.First());
+            return in_objects.Skip(1).Any(x => !in_getProperty(x).Approx(value)) ? (float?)null : value;
+        }
 
-            foreach (GameObject? gameObject in in_gameObjects.Skip(1))
-            {
-                if (value != (in_getProperty(gameObject))) return null;
-            }
+        public static bool? GetMixedValue<T>(List<T> in_objects, Func<T, bool> in_getProperty)
+        {
+            var value = in_getProperty(in_objects.First());
+            return in_objects.Skip(1).Any(x => value != in_getProperty(x)) ? (bool?)null : value;
+        }
 
-            return value;
+        public static string GetMixedValue<T>(List<T> in_objects, Func<T, string> in_getProperty)
+        {
+            var value = in_getProperty(in_objects.First());
+            return in_objects.Skip(1).Any(x => value != in_getProperty(x)) ? null : value;
         }
 
         protected virtual bool UpdateGameObjects(string propertyName)
@@ -220,6 +225,7 @@ namespace BluEditor.Components
         {
             m_enableUpdates = false;
             UpdateMSGameObjects();
+            MakeComponentList();
             m_enableUpdates = true;
         }
 

@@ -23,29 +23,6 @@ namespace BluEditor.Utilities
               : -Math.Pow(2, 10 * normalizedTime - 10) * Math.Sin((normalizedTime * 10 - 10.75) * c4);
         }
 
-        private double easeOutBounce(double time)
-        {
-            const double n1 = 7.5625;
-            const double d1 = 2.75;
-
-            if (time < 1 / d1)
-            {
-                return n1 * time * time;
-            }
-            else if (time < 2 / d1)
-            {
-                return n1 * (time -= 1.5 / d1) * time + 0.75;
-            }
-            else if (time < 2.5 / d1)
-            {
-                return n1 * (time -= 2.25 / d1) * time + 0.9375;
-            }
-            else
-            {
-                return n1 * (time -= 2.625 / d1) * time + 0.984375;
-            }
-        }
-
         protected override System.Windows.Freezable CreateInstanceCore()
         {
             return new CustomEasingFunction();

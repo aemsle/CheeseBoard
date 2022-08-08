@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 using BluEditor.GameProject;
 using BluEditor.Components;
 using BluEditor.Editors;
@@ -24,6 +24,8 @@ namespace BluEditor.Editors
     /// </summary>
     public partial class ProjectLayoutView : UserControl
     {
+        private CustomEasingFunction m_easing = new CustomEasingFunction();
+
         public ProjectLayoutView()
         {
             InitializeComponent();

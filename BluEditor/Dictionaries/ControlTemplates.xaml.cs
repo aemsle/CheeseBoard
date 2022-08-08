@@ -39,6 +39,45 @@ namespace BluEditor.Dictionaries
             }
         }
 
+        private void OnTextBoxRename_KeyDown(object in_sender, KeyEventArgs in_args)
+        {
+            TextBox textBox = (TextBox)in_sender;
+
+            BindingExpression expression = textBox.GetBindingExpression(TextBox.TextProperty);
+
+            if (expression == null) return;
+            if (in_args.Key == Key.Enter)
+            {
+                if (textBox.Tag is ICommand command && command.CanExecute(textBox.Text))
+                {
+                    command.Execute(textBox.Text);
+                }
+                else
+                {
+                    expression.UpdateSource();
+                }
+                textBox.Visibility = Visibility.Collapsed;
+                in_args.Handled = true;
+            }
+            else if (in_args.Key == Key.Escape)
+            {
+                expression.UpdateSource();
+                textBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void OnTextBoxRename_LostFocus(object in_sender, RoutedEventArgs in_args)
+        {
+            TextBox textBox = (TextBox)in_sender;
+            if (!textBox.IsVisible) return;
+            BindingExpression expression = textBox.GetBindingExpression(TextBox.TextProperty);
+            if (expression != null)
+            {
+                expression.UpdateTarget();
+                textBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
         private void OnClose_Button_Click(object in_sender, RoutedEventArgs in_args)
         {
             Window window = (Window)((FrameworkElement)in_sender).TemplatedParent;
