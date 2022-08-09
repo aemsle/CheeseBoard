@@ -33,14 +33,14 @@ public:
 
 	void cleanup() override
 	{
-		for (GameObject* go : entities)
+		for (game_object::GameObject* go : entities)
 		{
 			delete go;
 			go = nullptr;
 		}
 	}
 private:
-	std::vector<GameObject*> entities;
+	std::vector<game_object::GameObject*> entities;
 	uint32_t added{ 0 };
 	uint32_t removed{ 0 };
 	uint32_t num_entities{ 0 };
@@ -54,7 +54,7 @@ private:
 		{
 			added++;
 
-			entities.push_back(new GameObject());
+			entities.push_back(new game_object::GameObject());
 			assert(entities.back()->IsValid());
 			count--;
 		}
